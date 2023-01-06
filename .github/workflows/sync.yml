@@ -1,4 +1,4 @@
-name: Sync-Gitee
+name: Deployment
 
 on:
   push:
@@ -7,11 +7,12 @@ on:
       - 'public/**'
 
 jobs:
-  sync-resource:
+  sync-deployment:
     runs-on: ubuntu-20.04
     env:
       TZ: Asia/Shanghai
-
+    
+    steps:
     - name: Deploy to Gitee Resource
       env:
         GIT_NAME: weizj2000
