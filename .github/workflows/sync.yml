@@ -1,4 +1,4 @@
-name: Deployment
+name: Sync Github Repos To Gitee
 
 on:
   push:
@@ -7,22 +7,20 @@ on:
       - 'public/**'
 
 jobs:
-  sync-deployment:
+  build:
     runs-on: ubuntu-20.04
-    env:
-      TZ: Asia/Shanghai
-    
     steps:
-    - name: Deploy to Gitee Resource
-      env:
-        GIT_NAME: weizj2000
-        GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-        REPO: gitee.com/null_847_4226/resource.git
-        GE_TOKEN: ${{ secrets.GE_TOKEN }}
-      run: |
-        git init && git add .
-        git config --global user.name $GIT_NAME
-        git config --global user.email $GIT_EMAIL
-        git config --global init.defaultBranch main
-        git commit -m "Site deployed by GitHub Actions"
-        git push --force --quiet "https://$GE_TOKEN@$REPO" master:main
+    - name: Sync Github Repos To Gitee  # 名字随便起
+      uses: Yikun/hub-mirror-action@master  # 使用Yikun/hub-mirror-action
+      with:
+        src: github/weizj2000  # 源端账户名(github)
+        dst: gitee/weizj2000  # 目的端账户名(gitee)
+        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}  # SSH密钥对中的私钥
+        dst_token:  ${{ secrets.GITEE_TOKEN }}  # Gitee账户的私人令牌
+        account_type: user  # 账户类型
+        clone_style: "ssh"  # 使用https方式进行clone，也可以使用ssh
+        debug: true  # 启用后会显示所有执行命令
+        force_update: true  # 启用后，强制同步，即强制覆盖目的端仓库
+        static_list: "resource"  # 静态同步列表，在此填写需要同步的仓库名称，可填写多个
+        timeout: '600s'  # git超时设置，超时后会自动重试git操作
+        cache_path: /repo-cache
