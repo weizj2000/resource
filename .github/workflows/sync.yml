@@ -1,0 +1,26 @@
+name: Sync-Gitee
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/**'
+
+jobs:
+  sync-resource:
+    runs-on: ubuntu-20.04
+    env:
+      TZ: Asia/Shanghai
+
+    - name: Deploy to Gitee Resource
+      env:
+        GIT_NAME: weizj2000
+        GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+        REPO: gitee.com/null_847_4226/resource.git
+        GE_TOKEN: ${{ secrets.GE_TOKEN }}
+      run: |
+        git init && git add .
+        git config --global user.name $GIT_NAME
+        git config --global user.email $GIT_EMAIL
+        git commit -m "Site deployed by GitHub Actions"
+        git push --force --quiet "https://$GE_TOKEN@$REPO" master:master
