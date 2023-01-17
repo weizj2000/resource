@@ -29,7 +29,9 @@ jobs:
         source_dir: 'public'
         target_dir: '/'
     - run: |
+        ls public/images
         mc alias set pi-minio $endpoint $access_key $secret_key
+        mc alias ls
         mc mirror $source_dir pi-minio/$bucket$target_dir --remove --overwrite
         
     - name: Sync Github Repos To Gitee  # 名字随便起
