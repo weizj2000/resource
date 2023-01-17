@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: Minio Deploy
-      uses: lovellfelix/minio-deploy-action@v1
+      uses: mamal72/minio-perfect-deploy-action@main
       with:
         endpoint: ${{ secrets.MINIO_ENDPOINT }}
         access_key: ${{ secrets.MINIO_ACCESS_KEY }}
