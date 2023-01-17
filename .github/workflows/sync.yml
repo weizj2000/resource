@@ -10,6 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
+    - name: Minio Deploy
+      uses: lovellfelix/minio-deploy-action@v1
+      with:
+        endpoint: ${{ secrets.MINIO_ENDPOINT }}
+        access_key: ${{ secrets.MINIO_ACCESS_KEY }}
+        secret_key: ${{ secrets.MINIO_SECRET_KEY }}
+        bucket: 'public'
+        source_dir: 'public'
+        target_dir: '/'
     - name: Sync Github Repos To Gitee  # 名字随便起
       uses: Yikun/hub-mirror-action@master  # 使用Yikun/hub-mirror-action
       with:
