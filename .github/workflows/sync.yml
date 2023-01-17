@@ -20,7 +20,7 @@ jobs:
 #         source_dir: 'public/'
 #         target_dir: '/'
     - name: Minio Deploy
-      uses: mamal72/minio-perfect-deploy-action@main
+      uses: jhwz/minio-action@0.0.1
       env:
         endpoint: ${{ secrets.MINIO_ENDPOINT }}
         access_key: ${{ secrets.MINIO_ACCESS_KEY }}
