@@ -17,7 +17,7 @@ jobs:
         access_key: ${{ secrets.MINIO_ACCESS_KEY }}
         secret_key: ${{ secrets.MINIO_SECRET_KEY }}
         bucket: 'public'
-        source_dir: 'public'
+        source_dir: 'public/'
         target_dir: '/'
     - name: Sync Github Repos To Gitee  # 名字随便起
       uses: Yikun/hub-mirror-action@master  # 使用Yikun/hub-mirror-action
