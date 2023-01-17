@@ -20,20 +20,20 @@ jobs:
 #         source_dir: 'public/'
 #         target_dir: '/'
     - name: Minio Deploy
-      uses: jhwz/minio-action@0.0.1
-      env:
+      uses: lovellfelix/minio-deploy-action@v1
+      with:
         endpoint: ${{ secrets.MINIO_ENDPOINT }}
         access_key: ${{ secrets.MINIO_ACCESS_KEY }}
         secret_key: ${{ secrets.MINIO_SECRET_KEY }}
         bucket: ${{ secrets.MINIO_BUCKET }}
         source_dir: 'public'
         target_dir: '/'
-    - run: |
-        ls public/images
-        mc alias ls
-        mc alias set pi-minio $endpoint $access_key $secret_key
-        mc alias ls
-        mc mirror $source_dir pi-minio/$bucket$target_dir --remove --overwrite
+#     - run: |
+#         ls public/images
+#         mc alias ls
+#         mc alias set pi-minio $endpoint $access_key $secret_key
+#         mc alias ls
+#         mc mirror $source_dir pi-minio/$bucket$target_dir --remove --overwrite
         
 #     - name: Sync Github Repos To Gitee  # 名字随便起
 #       uses: Yikun/hub-mirror-action@master  # 使用Yikun/hub-mirror-action
