@@ -25,7 +25,7 @@ jobs:
         endpoint: ${{ secrets.MINIO_ENDPOINT }}
         access_key: ${{ secrets.MINIO_ACCESS_KEY }}
         secret_key: ${{ secrets.MINIO_SECRET_KEY }}
-        bucket: 'public'
+        bucket: ${{ secrets.MINIO_BUCKET }}
         source_dir: 'public'
         target_dir: '/'
     - run: |
